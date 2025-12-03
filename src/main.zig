@@ -10,6 +10,9 @@ const Error = error {
 };
 
 pub fn main() !void {
+    var general_purpose_allocator: std.heap.GeneralPurposeAllocator(.{}) = .init;
+    const gpa = general_purpose_allocator.allocator();
+
     var args_iter = std.process.args();
     if (!args_iter.skip()) unreachable;
 
@@ -24,7 +27,7 @@ pub fn main() !void {
     };
 
     switch (day) {
-        1 => day1.run(),
+        1 => try day1.run(gpa),
         else => {
             std.debug.print("Invalid day: {d}\n", .{day});
             return Error.InvalidDay;
