@@ -1,6 +1,7 @@
 const std = @import("std");
 
 const day1 = @import("./day1.zig");
+const day2 = @import("./day2.zig");
 
 const input = @embedFile("./inputs/day1");
 
@@ -28,6 +29,7 @@ pub fn main() !void {
 
     switch (day) {
         1 => try day1.run(gpa),
+        2 => try day2.run(gpa),
         else => {
             std.debug.print("Invalid day: {d}\n", .{day});
             return Error.InvalidDay;
