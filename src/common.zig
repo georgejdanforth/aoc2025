@@ -25,12 +25,16 @@ pub const StringIterator = struct {
     }
 
     pub fn next(self: *StringIterator) ?[]u8 {
+        if (self.offset >= self.data.len) {
+            return null;
+        }
         const start = self.offset;
         var end = self.offset;
         while (end < self.data.len and self.data[end] != self.delimiter) {
             end += 1;
         }
         if (end > self.data.len) {
+            self.offset = self.data.len;
             return null;
         }
         const line = self.data[start..end];
